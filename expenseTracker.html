@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+
+        table,tr,th{
+            border: 1px solid;
+            border-color: darkgray;
+            width: 70%;
+            height: fit-content;
+            
+        }
+        .head{
+            background-color: rgb(241, 235, 235);
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Expense Tracker</h1>
+    <h2>Add A New Item:</h2>
+    
+    <div class = "firstRow">
+        <label for = "subject">Name:</label>
+        <input type="text" id= "subject">
+    </div>
+    
+    <div class = "secondRow">
+        <label for = "date">Date:</label>
+        <input type="date" id = "date" >
+        <label for = "amount">Amount</label>
+        <input type="number" id = "amount">
+    </div>
+
+    <button onclick="addExpense()" id = "addExpense">Add Expense</button>
+    <hr>
+
+    <table id = "expenseTable">
+        <tr class = "head">
+            <th>Name</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <tr></tr>
+        </tr>
+        <tr id = "noValueRow">
+            <th>
+                No Expense added yet
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>            
+        </tr>        
+    </table>
+
+</body>
+<script src="expenseTracker.js"></script>
+</html>
