@@ -4,9 +4,12 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Document</title>
-
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!---
     <style>
         table{
             border-collapse: collapse;
@@ -24,46 +27,70 @@
         }
 
     </style>
+    -->
+
 </head>
 <body>
-    <h1>Expense Tracker</h1>
-    <h2>Add A New Item:</h2>
+    <h1 class="text-center" style="color: lightseagreen;" >Expense Tracker</h1>
+    <h2 class="text-center" style="color: rgb(5, 88, 70) ;">Add A New Item:</h2>
     
-    <div class = "firstRow">
-        <label for = "subject">Name:</label>
-        <input type="text" id= "subject">
+    <div class = "container">
+        <div class = "row">
+            <div class = "col">
+            <label for = "subject">Name:</label>
+            <input type="text" id= "subject" class="form-control">
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col">
+                <label for = "date">Date:</label>
+                <input type="date" id = "date" class="form-control">
+            </div>
+            <div class="col">
+                <label for = "amount">Amount</label>
+                <input type="number" id = "amount" class="form-control">
+            </div>
+            <div class="col-xs-1" style="align-self: flex-end;">
+                <button onclick="addExpense()" id = "addExpense" class="btn btn-info waves-effect waves-light">Add Expense</button>
+            </div>
+        </div>
     </div>
-    
-    <div class = "secondRow">
-        <label for = "date">Date:</label>
-        <input type="date" id = "date" >
-        <label for = "amount">Amount</label>
-        <input type="number" id = "amount">
-    </div>
+    <hr/>
 
-    <button onclick="addExpense()" id = "addExpense">Add Expense</button>
-    <hr>
-
-    <table id = "expenseTable">
-        <tr class = "head">
+    <div class = "container">
+    <table id = "expenseTable" class="table table-bordered">
+        <tr class = "head table-active">
             <th>Name</th>
             <th>Date</th>
             <th>Amount</th>
-            <tr></tr>
+            <th></th>
         </tr>
         <tr id = "noValueRow">
-            <th>
-                No Expense added yet
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>            
+            <td>No Expense added yet</td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>        
     </table>
+    </div>
+    <hr/>
 
+    <div class = container>
+        <div class = "row">
+            <div class = "col">
+            <button onclick="calculate()" class = "btn btn-info waves-effect waves-light">Calculate</button>
+            </div>
+            <div class = "col" id = "totalText">
+            
+            </div>
+            <div class = "col" id = "resultLine">
+
+            </div>
+    </div>
 </body>
 <script src="expenseTracker.js"></script>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </html>

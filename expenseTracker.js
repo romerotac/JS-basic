@@ -1,8 +1,8 @@
 var elementInList = [];
+var valueInList = [];
 
 function addExpense(){
 
-    var index = elementInList.length;
 
     var subject = String(document.getElementById("subject").value);
     
@@ -20,24 +20,35 @@ function addExpense(){
     var uselessRow = document.getElementById("noValueRow");
 
     //note: remove the element based on id and if there are no element in the list
-    if (index == 0){
+    if (elementInList.length == 0){
         uselessRow.remove();
     }
-    
+
+    var index = elementInList.length+1
+
     var newLine = document.createElement("tr");
     newLine.id = "line"+ index;
 
-    var newSubject = document.createElement("th");
+    var newSubject = document.createElement("td");
+    newSubject.style="text-align:center";
     newSubject.textContent = subject;
 
-    var newDate = document.createElement("th");
+    var newDate = document.createElement("td");
+    newDate.style="text-align:center";
     newDate.textContent = month +"-"+ day + "-" + year;
 
-    var newAmount = document.createElement("th");
-    newAmount.textContent = amount;
+    var newAmount = document.createElement("td");
+    newAmount.style="text-align:center";
+    newAmount.textContent = "$ "+amount;
     
+    var newButton = document.createElement("td")
+    newButton.style="text-align:center";
     var removeButton = document.createElement("button")
-    removeButton.textContent = "X";
+    removeButton.className="btn btn-secondary";
+    removeButton.textContent = "x";
+
+
+
     removeButton.onclick = function(){removeLine(index)};
     
     tableDiv.appendChild(newLine);
@@ -45,9 +56,13 @@ function addExpense(){
     newLine.appendChild(newSubject);
     newLine.appendChild(newDate);
     newLine.appendChild(newAmount);
-    newLine.appendChild(removeButton);
+    newLine.appendChild(newButton);
 
+    newButton.appendChild(removeButton);
+
+    console.log(elementInList)
     elementInList.push(newLine);
+    valueInList.push(amount);
 }
 
 function removeLine(index){
@@ -56,13 +71,16 @@ function removeLine(index){
 
     var uselessLine = document.createElement("tr");
 
-    var uselessSubject = document.createElement("th")
-    var uselessSubject1 = document.createElement("th")
-    var uselessSubject2 = document.createElement("th")
-    var uselessSubject3 = document.createElement("th")
+    var uselessSubject = document.createElement("td")
+    var uselessSubject1 = document.createElement("td")
+    var uselessSubject2 = document.createElement("td")
+    var uselessSubject3 = document.createElement("td")
     
     uselessSubject.textContent = "No Expenses added yet";
 
+
+    console.log(elementInList)
+    console.log(elementInList[index])
 
     tableDiv.removeChild(elementInList[index]);
 
@@ -77,4 +95,31 @@ function removeLine(index){
         uselessLine.appendChild(uselessSubject3);
     }
 
+    elementInList.splice(index,1);
+    console.log(elementInList)
+    console.log(elementInList.length)
+    
+    valueInList.splice(index,1);
+    console.log(valueInList)
+
+
+}   
+
+function calculate(){
+    
+    var title = document.getElementById("totalText");
+    var line = document.getElementById("resultLine");
+
+    var total = 0
+    for (let i = 0; i< valueInList.length; i++){
+        total = total + valueInList[i]
+    }
+
+    var text = document.createElement("h3");
+    text.textContent = "Total:";
+    var result = document.createElement("h3");
+    result.textContent = "$ " + total;
+
+    title.appendChild(text);
+    line.appendChild(result);
 }
