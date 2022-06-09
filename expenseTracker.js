@@ -1,118 +1,126 @@
-var elementInList = [];
-var valueInList = [];
+
+class Item {
+    constructor(id,row,value){
+        this.id = id;
+        this.row = row;
+        this.value = value;
+    }
+
+    getID(){
+        return this.id;
+    }
+
+    getValue(){
+        return this.value;
+    }
+
+    getRow(){
+        return this.row;
+    }
+
+    //this function check the id of the item to erase
+    deleteItem(item){
+        items = items.filter(u =>{
+            return u.id != item.id; 
+        })
+    }
+
+}
+
+//use to indicate the first index and id of the class object item
+var index = 0;
+//used to store all the items class object
+var items = [];
 
 function addExpense(){
 
+    
 
     var subject = String(document.getElementById("subject").value);
-    
+    var amount = Number(document.getElementById("amount").value);
+
     var d = new Date(document.getElementById("date").value);
     var day = d.getUTCDate();
     //note: we when using the function it will count the months from 0 to 11 (reading as array)
     var month = d.getMonth()+1;
     var year = d.getUTCFullYear();
     
-    
-    var amount = Number(document.getElementById("amount").value);
-
     var tableDiv = document.getElementById("expenseTable");
-
     var uselessRow = document.getElementById("noValueRow");
 
-    //note: remove the element based on id and if there are no element in the list
-    if (elementInList.length == 0){
-        uselessRow.remove();
-    }
 
-    var index = elementInList.length+1
+
+    var itemToPush = new Item(index,newLine,amount);
+ 
+    
 
     var newLine = document.createElement("tr");
     newLine.id = "line"+ index;
-
-    var newSubject = document.createElement("td");
+  
+    var newSubjectTD = document.createElement("td");
     newSubject.style="text-align:center";
     newSubject.textContent = subject;
 
-    var newDate = document.createElement("td");
+    var newDateTD = document.createElement("td");
     newDate.style="text-align:center";
     newDate.textContent = month +"-"+ day + "-" + year;
 
-    var newAmount = document.createElement("td");
+    var newAmountTD = document.createElement("td");
     newAmount.style="text-align:center";
     newAmount.textContent = "$ "+amount;
     
-    var newButton = document.createElement("td")
+    var newButtonTD = document.createElement("td")
     newButton.style="text-align:center";
+    
     var removeButton = document.createElement("button")
     removeButton.className="btn btn-secondary";
     removeButton.textContent = "x";
-
-
-
-    removeButton.onclick = function(){removeLine(index)};
+    removeButton.onclick = function(){removeLine(itemToPush)};
     
     tableDiv.appendChild(newLine);
     
-    newLine.appendChild(newSubject);
-    newLine.appendChild(newDate);
-    newLine.appendChild(newAmount);
-    newLine.appendChild(newButton);
+    newLine.appendChild(newSubjectTD);
+    newLine.appendChild(newDateTD);
+    newLine.appendChild(newAmountTD);
+    newLine.appendChild(newButtonTD);
 
-    newButton.appendChild(removeButton);
-
-    console.log(elementInList)
-    elementInList.push(newLine);
-    valueInList.push(amount);
-}
-
-function removeLine(index){
-
-    var tableDiv = document.getElementById("expenseTable");
-
-    var uselessLine = document.createElement("tr");
-
-    var uselessSubject = document.createElement("td")
-    var uselessSubject1 = document.createElement("td")
-    var uselessSubject2 = document.createElement("td")
-    var uselessSubject3 = document.createElement("td")
+    newButtonTD.appendChild(removeButton);
     
-    uselessSubject.textContent = "No Expenses added yet";
+    items.push(itemToPush);
 
+    index++;
 
-    console.log(elementInList)
-    console.log(elementInList[index])
-
-    tableDiv.removeChild(elementInList[index]);
-
-    //when there are no element in list create an empty line
-    if (index == 0){
-
-        tableDiv.appendChild(uselessLine);
-        
-        uselessLine.appendChild(uselessSubject);
-        uselessLine.appendChild(uselessSubject1);
-        uselessLine.appendChild(uselessSubject2);
-        uselessLine.appendChild(uselessSubject3);
+    if (items.length != 0){
+        uselessRow.style.display = "none";
     }
 
-    elementInList.splice(index,1);
-    console.log(elementInList)
-    console.log(elementInList.length)
     
-    valueInList.splice(index,1);
-    console.log(valueInList)
+}
 
+function removeLine(itemToPush){
 
+    var uselessRow = document.getElementById("noValueRow");
+    var tableDiv = document.getElementById("expenseTable");
+
+    tableDiv.removeChild(itemToPush.row);
+
+    itemToPush.deleteItem(itemToPush);
+
+   //when there are no element in list create an empty line
+    if (items.length == 0){
+        uselessRow.style.display = "block";
+    }
 }   
+
 
 function calculate(){
     
     var title = document.getElementById("totalText");
     var line = document.getElementById("resultLine");
 
-    var total = 0
-    for (let i = 0; i< valueInList.length; i++){
-        total = total + valueInList[i]
+    var total = 0;
+    for (let i = 0; i< items.length; i++){
+        total = total + items[i].getValue();
     }
 
     var text = document.createElement("h3");
