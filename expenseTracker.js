@@ -184,19 +184,16 @@ function removeLine(itemToPush){
 
 function calculate(){
     
-    var title = document.getElementById("totalText");
-    var line = document.getElementById("resultLine");
+    var title = document.getElementById("totalTitle");
+    var lineResult = document.getElementById("totalValue");
 
     var total = 0;
     for (let i = 0; i< items.length; i++){
         total = total + items[i].getValue();
     }
 
-    var text = document.createElement("h3");
-    text.textContent = "Total:";
-    var result = document.createElement("h3");
-    result.textContent = "$ " + total;
+    title.style = "display: contents;";
+    lineResult.style = "display: contents;";
+    lineResult.textContent = "$ " + total;
 
-    title.appendChild(text);
-    line.appendChild(result);
 }

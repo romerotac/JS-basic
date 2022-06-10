@@ -8,7 +8,11 @@
     <title>Document</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <style>
+    .total{
+        display: none;
+    }        
+    </style>
 </head>
 <body>
     <h1 class="text-center" style="color: lightseagreen;" >Expense Tracker</h1>
@@ -65,10 +69,10 @@
             <button onclick="calculate()" class = "btn btn-info waves-effect waves-light">Calculate</button>
             </div>
             <div class = "col" id = "totalText">
-            
+             <h3 id = "totalTitle" class = "total">Total:</h3>
             </div>
             <div class = "col" id = "resultLine">
-
+             <h3 id = "totalValue" class = "total"></h3> 
             </div>
     </div>
 </body>
