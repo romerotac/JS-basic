@@ -32,9 +32,64 @@ var index = 0;
 //used to store all the items class object
 var items = [];
 
+var flagCheckName = false;
+var flagCheckDate = false;
+const idErrorName = 'errorName';
+const idErrorDate = 'errorDate'; 
+
+const alertName = document.getElementById("alertForName");
+const alertDate = document.getElementById("alertForDate");
+const alertAmount = document.getElementById("alertForAmount");
+
+const alert = (message, type, line,id) => {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+      `<div class="alert alert-${type} alert-dismissible" role="alert" id = "${id}">`,
+      `   <div>${message}</div>`,
+      '</div>'
+    ].join('')
+    
+    line.append(wrapper);
+  }
+
+
+
+
+function checkName(name){
+    if (name == '' && flagCheckName == false){
+        alert('Please enter a Name','danger',alertName,idErrorName);
+        flagCheckName = true;
+        return true;
+    }
+    
+    if (flagCheckName == true){
+        flagCheckName = false;
+        $('#'+idErrorName).alert('close')
+    }
+    
+    return false;
+}
+
+function checkDate(date){
+    
+    if (date == 'NaN-NaN-NaN' && flagCheckDate == false){
+        alert('Please enter a correct Date','danger',alertDate,idErrorDate);
+        flagCheckDate = true;
+        return true;
+    }
+    
+    if (flagCheckDate == true){
+        flagCheckDate = false;
+        $('#'+idErrorDate).alert('close')
+    }
+
+    return false;
+}
+
+
 function addExpense(){
 
-    
+
 
     var subject = String(document.getElementById("subject").value);
     var amount = Number(document.getElementById("amount").value);
@@ -49,34 +104,43 @@ function addExpense(){
     var uselessRow = document.getElementById("noValueRow");
 
 
-
-    var itemToPush = new Item(index,newLine,amount);
- 
-    
-
     var newLine = document.createElement("tr");
     newLine.id = "line"+ index;
+
+    var itemToPush = new Item(index,newLine,amount);
   
     var newSubjectTD = document.createElement("td");
-    newSubject.style="text-align:center";
-    newSubject.textContent = subject;
+    newSubjectTD.style="text-align:center";
+    newSubjectTD.textContent = subject;
 
     var newDateTD = document.createElement("td");
-    newDate.style="text-align:center";
-    newDate.textContent = month +"-"+ day + "-" + year;
+    var date = month +"-"+ day + "-" + year
+    newDateTD.style="text-align:center";
+    newDateTD.textContent = date;
+
 
     var newAmountTD = document.createElement("td");
-    newAmount.style="text-align:center";
-    newAmount.textContent = "$ "+amount;
+    newAmountTD.style="text-align:center";
+    newAmountTD.textContent = "$ "+amount;
     
     var newButtonTD = document.createElement("td")
-    newButton.style="text-align:center";
+    newButtonTD.style="text-align:center";
     
     var removeButton = document.createElement("button")
     removeButton.className="btn btn-secondary";
     removeButton.textContent = "x";
     removeButton.onclick = function(){removeLine(itemToPush)};
     
+    var flag1 = checkDate(date);
+    var flag2 = checkName(subject);
+
+
+    console.log(flag1)
+    console.log(flag2)
+    console.log(flagCheckDate)
+    console.log(flagCheckName)
+
+    if ((flag1 == false && flag2 == false ) && (flagCheckDate == false && flagCheckName == false)){
     tableDiv.appendChild(newLine);
     
     newLine.appendChild(newSubjectTD);
@@ -89,11 +153,16 @@ function addExpense(){
     items.push(itemToPush);
 
     index++;
+  
+    }
+
+    
 
     if (items.length != 0){
         uselessRow.style.display = "none";
     }
 
+    
     
 }
 
@@ -108,7 +177,7 @@ function removeLine(itemToPush){
 
    //when there are no element in list create an empty line
     if (items.length == 0){
-        uselessRow.style.display = "block";
+        uselessRow.style.display = "contents";
     }
 }   
 
