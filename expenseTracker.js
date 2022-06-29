@@ -153,7 +153,8 @@ function addExpense(){
     items.push(itemToPush);
 
     index++;
-  
+    subject.textContent = "";
+        
     }
 
     
