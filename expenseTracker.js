@@ -92,7 +92,7 @@ function addExpense(){
 
 
     var subject = String(document.getElementById("subject").value);
-    var amount = parseFloat(document.getElementById("amount").value).toFixed(2);
+    var amount = Number(document.getElementById("amount").value).toFixed(2);
 
     var d = new Date(document.getElementById("date").value);
     var day = d.getUTCDate();
