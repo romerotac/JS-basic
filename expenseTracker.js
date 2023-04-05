@@ -92,7 +92,7 @@ function addExpense(){
 
 
     var subject = String(document.getElementById("subject").value);
-    var amount = Number(document.getElementById("amount").value);
+    var amount = parseFloat(document.getElementById("amount").value).toFixed(2);
 
     var d = new Date(document.getElementById("date").value);
     var day = d.getUTCDate();
@@ -107,7 +107,7 @@ function addExpense(){
     var newLine = document.createElement("tr");
     newLine.id = "line"+ index;
 
-    var itemToPush = new Item(index,newLine,amount.toFixed(2));
+    var itemToPush = new Item(index,newLine,amount);
   
     var newSubjectTD = document.createElement("td");
     newSubjectTD.style="text-align:center";
@@ -195,6 +195,6 @@ function calculate(){
 
     title.style = "display: contents;";
     lineResult.style = "display: contents;";
-    lineResult.textContent = "$ " + total.toFixed(2);
+    lineResult.textContent = "$ " + total;
 
 }
