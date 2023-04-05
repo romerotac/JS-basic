@@ -107,7 +107,7 @@ function addExpense(){
     var newLine = document.createElement("tr");
     newLine.id = "line"+ index;
 
-    var itemToPush = new Item(index,newLine,amount);
+    var itemToPush = new Item(index,newLine,amount.toFixed(2));
   
     var newSubjectTD = document.createElement("td");
     newSubjectTD.style="text-align:center";
