@@ -194,6 +194,6 @@ function calculate(){
 
     title.style = "display: contents;";
     lineResult.style = "display: contents;";
-    lineResult.textContent = "$ " + total;
+    lineResult.textContent = "$ " + total.toFixed(2);
 
 }
