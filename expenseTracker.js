@@ -190,11 +190,11 @@ function calculate(){
 
     var total = 0;
     for (let i = 0; i< items.length; i++){
-        total = parseFloat(total) + items[i].getValue();
+        total = parseFloat(total) + parseFloat(items[i].getValue());
     }
 
     title.style = "display: contents;";
     lineResult.style = "display: contents;";
-    lineResult.textContent = "$ " + total;
+    lineResult.textContent = "$ " + total.toFixed(2);
 
 }
